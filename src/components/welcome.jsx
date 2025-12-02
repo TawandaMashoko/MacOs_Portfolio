@@ -22,7 +22,8 @@ const renderText = (text, className, baseWeight = 400) => {
 };
 
 const setupTextHover = (container, type) => {
-  if (!container) return;
+  // If there's no container, return a no-op cleanup function
+  if (!container) return () => {};
 
   const letters = container.querySelectorAll("span");
   const { min, max, default: base } = FONT_WEIGHTS[type];
@@ -49,13 +50,13 @@ const setupTextHover = (container, type) => {
   };
 
   const handleMouseLeave = () => {
-    letters.forEach((letter) => animateLetter(letter, base, 0.9));
+    letters.forEach((letter) => animateLetter(letter, base, 0.3));
   };
 
   container.addEventListener("mousemove", handleMouseMove);
   container.addEventListener("mouseleave", handleMouseLeave);
 
-  // Cleanup
+  // Always return a cleanup function
   return () => {
     container.removeEventListener("mousemove", handleMouseMove);
     container.removeEventListener("mouseleave", handleMouseLeave);
@@ -70,9 +71,10 @@ const Welcome = () => {
     const cleanupTitle = setupTextHover(titleRef.current, "title");
     const cleanupSubtitle = setupTextHover(subtitleRef.current, "subtitle");
 
+    // Now we know both are functions, so we can safely call them directly
     return () => {
-      cleanupTitle && cleanupTitle();
-      cleanupSubtitle && cleanupSubtitle();
+      cleanupTitle();
+      cleanupSubtitle();
     };
   }, []);
 
