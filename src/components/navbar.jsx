@@ -1,33 +1,34 @@
 import dayjs from "dayjs";
-import { navIcons, navLinks } from "#constants/index.js";
-
+import { navIcons, navLinks } from "#constants/index.js"; // change to "../constants" or "@/constants" if alias isn't set
 
 const Navbar = () => {
-  return <nav>
-    <div>
+  return (
+    <nav>
+      <div>
         <img src="/images/logo.svg" alt="Logo" />
-        <p className="font-bold">Tawanda's Portfolio</p>
+        <p className="font-bold">Tawanda&apos;s Portfolio</p>
 
         <ul>
-            {navLinks.map(({id, name}) => (
-                <li key={id}>
-                    <p>{name}</p>
-                </li>
-            ))}
+          {navLinks.map(({ id, name }) => (
+            <li key={id}>
+              <p>{name}</p>
+            </li>
+          ))}
         </ul>
-    </div>
+      </div>
 
-    <div>
+      <div>
         <ul>
-            {navIcons.map(({id, img}) => (
-                <li key={id}>
-                    <img src={img} className="icon-hover" alt={`icon-${id}`} />
-                </li>
-            ))}
+          {navIcons.map(({ id, img }) => (
+            <li key={id}>
+              <img src={img} className="icon-hover" alt={`icon-${id}`} />
+            </li>
+          ))}
         </ul>
         <time>{dayjs().format("ddd MMM D h:mm A")}</time>
-    </div>
-  </nav>;
-}
+      </div>
+    </nav>
+  );
+};
 
-export default Navbar
+export default Navbar;
