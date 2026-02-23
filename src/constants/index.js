@@ -49,12 +49,6 @@ const dockApps = [
     canOpen: true,
   },
   {
-    id: "photos",
-    name: "Gallery", // was "Photos"
-    icon: "photos.png",
-    canOpen: true,
-  },
-  {
     id: "contact",
     name: "Contact", // or "Get in touch"
     icon: "contact.png",
@@ -65,12 +59,6 @@ const dockApps = [
     name: "Skills", // was "Terminal"
     icon: "terminal.png",
     canOpen: true,
-  },
-  {
-    id: "trash",
-    name: "Archive", // was "Trash"
-    icon: "trash.png",
-    canOpen: false,
   },
 ];
 
@@ -229,50 +217,28 @@ const WORK_LOCATION = {
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-10 left-5", // icon position inside Finder
-      windowPosition: "top-[5vh] left-5", // optional: Finder window position
+      windowPosition: "top-[5vh] left-5", // desktop icon position
       children: [
         {
           id: 1,
-          name: "Horizon Bank.txt",
+          name: "README.txt",
           icon: "/images/txt.png",
           kind: "file",
           fileType: "txt",
           position: "top-5 left-10",
-         description: [
-            "Most of my front-end experience i learnt was from JSMastery Platform, he taught me everything i know now through youtube and this app was one of his videos",
-  "Not Only did i learn to gain confidence but knowing the frustration of debugging with him, paying attention to details and everything",
-  "Instead of feeling like a traditional banking app, it delivers a seamless, interactive environment with clean dashboards, real-time insights, and smooth navigation.",
-  "I remember feeling like wow, i actually did this, i never stopped then, it was hard but i kept going with him, the journey continued",
-  "He built this bank with so many viewers coding it with him and he is a great teacher, really grateful to him otherwise i would have not made this CV too",
-],
-
+          description: [
+            "A banking UI project I built while learning front-end development.",
+            "I focused on clean dashboards, smooth navigation, and an interactive experience.",
+          ],
         },
         {
           id: 2,
-          name: "horizon.com",
+          name: "banking (GitHub)",
           icon: "/images/safari.png",
           kind: "file",
           fileType: "url",
           href: "https://github.com/TawandaMashoko/banking",
           position: "top-10 right-20",
-        },
-        {
-          id: 4,
-          name: "nike.png",
-          icon: "/images/image.png",
-          kind: "file",
-          fileType: "img",
-          position: "top-52 right-80",
-          imageUrl: "/images/project-1.png",
-        },
-        {
-          id: 5,
-          name: "Design.fig",
-          icon: "/images/plain.png",
-          kind: "file",
-          fileType: "fig",
-          href: "https://google.com",
-          position: "top-60 right-20",
         },
       ],
     },
@@ -288,97 +254,24 @@ const WORK_LOCATION = {
       children: [
         {
           id: 1,
-          name: "Fruits fastAPI.txt",
-          icon: "/images/txt.png",
-          kind: "file",
-          fileType: "txt",
-          position: "top-5 right-10",
-          description: [
-            "Fast Fruit API was my first API i did with Flask, with help of a developer on youtube who taught me how to combine python and react",
-            "I continued to grow from here, not only using python as a language i learn data structures and algorithms with but something more",
-            "Flask is relatively smaller than Django Framework but i learnt a lot, small beginnings, taking it slow",
-          ],
-        },
-        {
-          id: 2,
-          name: "Fruits-fastAPI",
-          icon: "/images/safari.png",
-          kind: "file",
-          fileType: "url",
-          href: "https://github.com/TawandaMashoko/Fruits-FastAPI",
-          position: "top-20 left-20",
-        },
-        {
-          id: 4,
-          name: "fruits.png",
-          icon: "/images/image.png",
-          kind: "file",
-          fileType: "img",
-          position: "top-52 left-80",
-          imageUrl: "/images/project-2.png",
-        },
-        {
-          id: 5,
-          name: "Design.fig",
-          icon: "/images/plain.png",
-          kind: "file",
-          fileType: "fig",
-          href: "https://github.com/TawandaMashoko/Fruits-FastAPI",
-          position: "top-60 left-5",
-        },
-      ],
-    },
-
-    // ▶ Project 3
-    {
-      id: 7,
-      name: "Employee Registry API",
-      icon: "/images/folder.png",
-      kind: "folder",
-      position: "top-10 left-80",
-      windowPosition: "top-[33vh] left-7",
-      children: [
-        {
-          id: 1,
-          name: "Employee Registry API",
+          name: "README.txt",
           icon: "/images/txt.png",
           kind: "file",
           fileType: "txt",
           position: "top-5 left-10",
-         description: [
-  "Our Employee Registration System is a secure and efficient way for organizations to manage employee records in one place.",
-  "Instead of manually tracking data or using scattered spreadsheets, users can register employees, update details, and organize information with ease.",
-  "Think of it like a digital HR assistant—streamlining employee onboarding, record management, and administrative workflows.",
-  "It’s built with Next.js and Node.js, creating a fast, modern, and responsive full-stack application powered by a secure MongoDB Atlas database.",
-],
-
+          description: [
+            "A simple API project I built to practice backend fundamentals (routing, requests, responses, and clean project structure).",
+            "This project helped me level up from Python basics into building real APIs.",
+          ],
         },
         {
           id: 2,
-          name: "employee-registry-api",
+          name: "Fruits-FastAPI (GitHub)",
           icon: "/images/safari.png",
           kind: "file",
           fileType: "url",
-          href: "https://github.com/TawandaMashoko/EmployeeRESTAPI",
+          href: "https://github.com/TawandaMashoko/Fruits-FastAPI",
           position: "top-10 right-20",
-        },
-        {
-          id: 4,
-          name: "food-delivery-app.png",
-          icon: "/images/image.png",
-          kind: "file",
-          fileType: "img",
-          position: "top-52 right-80",
-          imageUrl: "/images/project-3.png",
-        },
-        {
-          id: 5,
-          name: "Design.fig",
-          icon: "/images/plain.png",
-          kind: "file",
-          fileType: "fig",
-          href: "https://google.com",
-          position: "top-60 right-20",
         },
       ],
     },

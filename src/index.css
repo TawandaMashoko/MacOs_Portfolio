@@ -337,14 +337,36 @@ body {
       @apply flex-1 p-8 bg-white max-w-2xl relative;
 
       li {
-        @apply absolute flex items-center flex-col gap-3;
+        /* Finder icon */
+        @apply absolute flex flex-col items-center gap-2 select-none cursor-pointer;
 
         img {
-          @apply object-contain object-center size-16 relative group-hover:scale-105;
+          @apply object-contain object-center size-14 drop-shadow-md transition-transform duration-200;
         }
 
         p {
-          @apply text-sm text-center font-medium w-40;
+          @apply text-xs text-center font-medium w-36 px-2 py-0.5 rounded-md bg-gray-50/80 backdrop-blur border border-gray-200;
+
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+
+        &:hover {
+          img {
+            @apply scale-105;
+          }
+
+          p {
+            @apply bg-blue-100 text-blue-700 border-blue-200;
+          }
+        }
+
+        &:active {
+          img {
+            @apply scale-95;
+          }
         }
       }
     }
@@ -381,14 +403,40 @@ body {
 
     ul {
       li {
-        @apply absolute z-0 select-none flex items-center flex-col;
+        /* Desktop icon */
+        @apply absolute z-0 select-none flex flex-col items-center gap-1 w-24 cursor-pointer;
+
+        /* Helps GSAP Draggable on touch devices / trackpads */
+        touch-action: none;
 
         img {
-          @apply group-hover:bg-gray-950/10 p-1 rounded-md;
+          @apply size-14 3xl:size-16 object-contain p-1 rounded-xl drop-shadow-lg transition-transform duration-200;
         }
 
         p {
-          @apply text-sm text-white text-center px-1 rounded-md group-hover:bg-blue-500 transition-colors max-w-40;
+          @apply text-[13px] leading-tight text-white text-center px-2 py-0.5 rounded-md bg-black/25 backdrop-blur-md shadow-sm transition-colors;
+
+          max-width: 7.5rem;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+
+        &:hover {
+          img {
+            @apply scale-105;
+          }
+
+          p {
+            @apply bg-blue-500/90;
+          }
+        }
+
+        &:active {
+          img {
+            @apply scale-95;
+          }
         }
       }
     }
