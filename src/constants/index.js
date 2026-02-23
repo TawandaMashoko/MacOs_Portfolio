@@ -382,6 +382,72 @@ const WORK_LOCATION = {
         },
       ],
     },
+
+    // ▶ Project 4
+    {
+      id: 8,
+      name: "Web Crawler",
+      icon: "/images/folder.png",
+      kind: "folder",
+      position: "top-52 left-5",
+      windowPosition: "top-[45vh] left-7",
+      children: [
+        {
+          id: 1,
+          name: "Web Crawler.txt",
+          icon: "/images/txt.png",
+          kind: "file",
+          fileType: "txt",
+          position: "top-5 left-10",
+          description: [
+            "A web crawler project I built to explore scraping/crawling fundamentals and how to structure a Node.js codebase for it.",
+            "I also wrote tests for it using Jest — it helped me learn how to validate crawling logic and keep changes safe when refactoring.",
+          ],
+        },
+        {
+          id: 2,
+          name: "webcrawlerhttp",
+          icon: "/images/safari.png",
+          kind: "file",
+          fileType: "url",
+          href: "https://github.com/TawandaMashoko/webcrawlerhttp",
+          position: "top-10 right-20",
+        },
+      ],
+    },
+
+    // ▶ Project 5
+    {
+      id: 9,
+      name: "giftlink",
+      icon: "/images/folder.png",
+      kind: "folder",
+      position: "top-10 right-20",
+      windowPosition: "top-[58vh] left-7",
+      children: [
+        {
+          id: 1,
+          name: "giftlink.txt",
+          icon: "/images/txt.png",
+          kind: "file",
+          fileType: "txt",
+          position: "top-5 left-10",
+          description: [
+            "A full-stack capstone project I built while completing an Express backend course on Coursera.",
+            "It focuses on applying backend fundamentals (Express APIs, routing, middleware, etc.) in a real project to complete the course.",
+          ],
+        },
+        {
+          id: 2,
+          name: "fullstack-capstone-project",
+          icon: "/images/safari.png",
+          kind: "file",
+          fileType: "url",
+          href: "https://github.com/TawandaMashoko/fullstack-capstone-project",
+          position: "top-10 right-20",
+        },
+      ],
+    },
   ],
 };
 
