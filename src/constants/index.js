@@ -9,6 +9,11 @@ const navLinks = [
     name: "Contact",
     type: "contact",
   },
+  {
+    id: 4,
+    name: "Resume",
+    type: "resume",
+  },
 ];
 
 const navIcons = [

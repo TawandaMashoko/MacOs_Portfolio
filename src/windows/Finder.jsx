@@ -48,10 +48,7 @@ const Finder = () => {
 
       <div className="bg-white flex h-full">
         <div className="sidebar">
-          {renderList(
-            "Favourites",
-            Object.values(locations).filter((loc) => loc.type !== "resume")
-          )}
+          {renderList("Favourites", Object.values(locations))}
           {renderList("My Project", locations.work.children)}
         </div>
 
