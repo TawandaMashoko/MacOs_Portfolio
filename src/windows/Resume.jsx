@@ -17,6 +17,7 @@ const Resume = () => {
   const containerRef = useRef(null);
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
   const [pageSize, setPageSize] = useState({ width: 0, height: 0 });
+  const [loadError, setLoadError] = useState(null);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -38,7 +39,6 @@ const Resume = () => {
     const { width: cw, height: ch } = containerSize;
     const { width: pw, height: ph } = pageSize;
 
-    // If we don't know sizes yet, fall back to default scale.
     if (!cw || !ch || !pw || !ph) return 1;
 
     // Fit the entire PDF page within the available viewport (no cropping).
@@ -46,8 +46,24 @@ const Resume = () => {
     const maxW = Math.max(cw - padding, 0);
     const maxH = Math.max(ch - padding, 0);
 
-    return Math.min(maxW / pw, maxH / ph);
+    // Guard against NaN / Infinity
+    const next = Math.min(maxW / pw, maxH / ph);
+    return Number.isFinite(next) && next > 0 ? next : 1;
   }, [containerSize, pageSize]);
+
+  const handleDocumentLoadSuccess = async (pdf) => {
+    try {
+      setLoadError(null);
+
+      // Use pdf.js viewport as the source of truth for page dimensions.
+      const page = await pdf.getPage(1);
+      const viewport = page.getViewport({ scale: 1 });
+      setPageSize({ width: viewport.width, height: viewport.height });
+    } catch (err) {
+      console.error(err);
+      setLoadError(err);
+    }
+  };
 
   return (
     <>
@@ -71,16 +87,26 @@ const Resume = () => {
       </div>
 
       <div ref={containerRef} className="resume-viewer">
-        <Document file="/files/resume.pdf" onLoadError={(err) => console.error(err)}>
-          <Page
-            pageNumber={1}
-            scale={scale}
-            onLoadSuccess={(page) =>
-              setPageSize({ width: page.originalWidth, height: page.originalHeight })
-            }
-            renderAnnotationLayer={false}
-          />
-        </Document>
+        {loadError ? (
+          <div className="text-sm text-gray-700">Failed to load resume.</div>
+        ) : (
+          <Document
+            file="/files/resume.pdf"
+            onLoadSuccess={handleDocumentLoadSuccess}
+            onLoadError={(err) => {
+              console.error(err);
+              setLoadError(err);
+            }}
+            loading={<div className="text-sm text-gray-700">Loading resume…</div>}
+          >
+            <Page
+              pageNumber={1}
+              scale={scale}
+              renderAnnotationLayer={false}
+              renderTextLayer={false}
+            />
+          </Document>
+        )}
       </div>
     </>
   );

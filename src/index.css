@@ -310,7 +310,17 @@ body {
     }
 
     .resume-viewer {
-      @apply flex-1 bg-gray-200 flex items-center justify-center overflow-hidden p-2;
+      @apply flex-1 bg-gray-200 flex items-center justify-center overflow-auto p-2;
+
+      /* react-pdf renders a canvas; ensure it doesn't overflow in odd ways */
+      .react-pdf__Page {
+        @apply shadow-lg bg-white;
+      }
+
+      canvas {
+        max-width: 100% !important;
+        height: auto !important;
+      }
     }
   }
 
