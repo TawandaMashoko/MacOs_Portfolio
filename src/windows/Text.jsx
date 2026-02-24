@@ -30,9 +30,17 @@ const TextFile = () => {
         )}
 
         <div className="prose max-w-none">
-          {description.map((para, i) => (
-            <p key={i}>{para}</p>
-          ))}
+          {description.map((block, i) => {
+            if (typeof block === 'string' && block.startsWith('## ')) {
+              return (
+                <h2 key={i} className="mt-6 mb-2 text-lg font-semibold text-gray-900">
+                  {block.replace(/^##\s+/, '')}
+                </h2>
+              );
+            }
+
+            return <p key={i}>{block}</p>;
+          })}
         </div>
       </div>
     </>
