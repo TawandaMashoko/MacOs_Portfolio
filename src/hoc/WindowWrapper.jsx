@@ -14,11 +14,22 @@ const WindowWrapper = (Component, windowKey) => {
     const isOpen = windowState?.isOpen ?? false;
     const zIndex = windowState?.zIndex;
 
+    const avoidTransform = windowKey === 'resume';
+
     useGSAP(() => {
       const el = ref.current;
       if (!el || !isOpen) return;
 
       el.style.display = 'block';
+
+      // Embedding PDFs (iframe/object) inside transformed elements can cause flicker/partial paints.
+      // Avoid transforms for the resume window.
+      if (avoidTransform) {
+        gsap.set(el, { clearProps: 'transform' });
+        gsap.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: 'power1.out' });
+        return;
+      }
+
       gsap.fromTo(
         el,
         { scale: 0.8, opacity: 0, y: 40 },
@@ -37,6 +48,7 @@ const WindowWrapper = (Component, windowKey) => {
       if (!el) return;
 
       const [instance] = Draggable.create(el, {
+        type: avoidTransform ? 'top,left' : 'x,y',
         onPress: () => focusWindow(windowKey),
       });
 

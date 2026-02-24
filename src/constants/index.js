@@ -217,7 +217,7 @@ const WORK_LOCATION = {
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-10 left-5", // icon position inside Finder
-      windowPosition: "top-[5vh] left-5", // desktop icon position
+      windowPosition: "top-[10vh] left-6", // desktop icon position
       children: [
         {
           id: 1,
@@ -250,7 +250,7 @@ const WORK_LOCATION = {
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-52 right-80",
-      windowPosition: "top-[20vh] left-7",
+      windowPosition: "top-[10vh] left-32",
       children: [
         {
           id: 1,
@@ -283,7 +283,7 @@ const WORK_LOCATION = {
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-52 left-5",
-      windowPosition: "top-[45vh] left-7",
+      windowPosition: "top-[32vh] left-6",
       children: [
         {
           id: 1,
@@ -316,7 +316,7 @@ const WORK_LOCATION = {
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-10 right-20",
-      windowPosition: "top-[58vh] left-7",
+      windowPosition: "top-[32vh] left-32",
       children: [
         {
           id: 1,

@@ -1,70 +1,10 @@
 // src/windows/Resume.jsx
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React from 'react';
 import { WindowControls } from '#components';
 import WindowWrapper from '#hoc/WindowWrapper';
 import { Download } from 'lucide-react';
-import { Document, Page, pdfjs } from 'react-pdf';
-
-import 'react-pdf/dist/Page/AnnotationLayer.css';
-import 'react-pdf/dist/Page/TextLayer.css';
-
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
-  import.meta.url,
-).toString();
 
 const Resume = () => {
-  const containerRef = useRef(null);
-  const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
-  const [pageSize, setPageSize] = useState({ width: 0, height: 0 });
-  const [loadError, setLoadError] = useState(null);
-
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-
-    const observer = new ResizeObserver((entries) => {
-      const entry = entries[0];
-      if (!entry) return;
-
-      const { width, height } = entry.contentRect;
-      setContainerSize({ width, height });
-    });
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  const scale = useMemo(() => {
-    const { width: cw, height: ch } = containerSize;
-    const { width: pw, height: ph } = pageSize;
-
-    if (!cw || !ch || !pw || !ph) return 1;
-
-    // Fit the entire PDF page within the available viewport (no cropping).
-    const padding = 16; // keep a small margin around the page
-    const maxW = Math.max(cw - padding, 0);
-    const maxH = Math.max(ch - padding, 0);
-
-    // Guard against NaN / Infinity
-    const next = Math.min(maxW / pw, maxH / ph);
-    return Number.isFinite(next) && next > 0 ? next : 1;
-  }, [containerSize, pageSize]);
-
-  const handleDocumentLoadSuccess = async (pdf) => {
-    try {
-      setLoadError(null);
-
-      // Use pdf.js viewport as the source of truth for page dimensions.
-      const page = await pdf.getPage(1);
-      const viewport = page.getViewport({ scale: 1 });
-      setPageSize({ width: viewport.width, height: viewport.height });
-    } catch (err) {
-      console.error(err);
-      setLoadError(err);
-    }
-  };
-
   return (
     <>
       <div
@@ -73,7 +13,7 @@ const Resume = () => {
       >
         <div className="flex items-center gap-2">
           <WindowControls target="resume" />
-          <h2 className="font-medium text-sm">Resume.pdf</h2>
+          <h2 className="font-medium text-sm">Resume</h2>
         </div>
 
         <a
@@ -86,27 +26,16 @@ const Resume = () => {
         </a>
       </div>
 
-      <div ref={containerRef} className="resume-viewer">
-        {loadError ? (
-          <div className="text-sm text-gray-700">Failed to load resume.</div>
-        ) : (
-          <Document
-            file="/files/resume.pdf"
-            onLoadSuccess={handleDocumentLoadSuccess}
-            onLoadError={(err) => {
-              console.error(err);
-              setLoadError(err);
-            }}
-            loading={<div className="text-sm text-gray-700">Loading resume…</div>}
-          >
-            <Page
-              pageNumber={1}
-              scale={scale}
-              renderAnnotationLayer={false}
-              renderTextLayer={false}
-            />
-          </Document>
-        )}
+      <div className="resume-download">
+        <a
+          className="download-cta"
+          href="/files/resume.pdf"
+          download
+          aria-label="Download resume PDF"
+        >
+          <span className="emoji" aria-hidden="true">😊</span>
+          <span className="label-btn">Download</span>
+        </a>
       </div>
     </>
   );

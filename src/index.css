@@ -66,6 +66,50 @@ body {
     @apply p-1 hover:bg-gray-200 rounded hover:cursor-default;
   }
 
+  @keyframes oz-soft-bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
+  @keyframes oz-charge-pulse {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.06);
+    }
+  }
+
+  .menubar-right {
+    @apply relative;
+  }
+
+  .menubar-icons {
+    @apply flex items-center gap-2 max-sm:hidden;
+  }
+
+  .menubar-btn {
+    @apply p-1 rounded-md hover:bg-gray-200 active:scale-95 transition;
+
+    img {
+      @apply w-5 h-5;
+    }
+  }
+
+  .menubar-btn.charging {
+    animation: oz-charge-pulse 1.2s ease-in-out infinite;
+  }
+
+  .menubar-toast {
+    @apply absolute -top-7 right-0 text-xs bg-black/70 text-white px-2 py-1 rounded-md;
+  }
+
   #welcome {
     @apply text-gray-200 flex flex-col justify-center items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none max-sm:h-screen max-sm:w-full max-sm:px-10;
 
@@ -297,11 +341,10 @@ body {
   }
 
   #resume {
-    /* Fixed-ish window size so the PDF can be fit-to-page reliably */
-    @apply absolute top-16 left-7/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden flex flex-col;
+    @apply absolute top-16 left-7/12 bg-white shadow-2xl rounded-xl overflow-hidden flex flex-col;
 
-    width: min(92vw, 900px);
-    height: min(85vh, 900px);
+    width: min(92vw, 700px);
+    height: min(70vh, 520px);
 
     #window-header {
       h2 {
@@ -309,17 +352,47 @@ body {
       }
     }
 
-    .resume-viewer {
-      @apply flex-1 bg-gray-200 flex items-center justify-center overflow-auto p-2;
+    .resume-download {
+      @apply flex-1 flex items-center justify-center p-10;
+      background: radial-gradient(1200px circle at 20% 10%, rgba(59, 130, 246, 0.14), transparent 45%),
+        radial-gradient(900px circle at 80% 30%, rgba(99, 102, 241, 0.12), transparent 50%),
+        linear-gradient(to bottom, #f8fafc, #f3f4f6);
 
-      /* react-pdf renders a canvas; ensure it doesn't overflow in odd ways */
-      .react-pdf__Page {
-        @apply shadow-lg bg-white;
+      .download-cta {
+        @apply select-none inline-flex items-center gap-6;
+        @apply bg-white/80 backdrop-blur-xl border border-white/60 rounded-3xl;
+        @apply px-10 py-8 shadow-xl transition;
+
+        min-width: min(92vw, 620px);
+
+        &:hover {
+          @apply bg-white/90 -translate-y-0.5;
+          box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+        }
+
+        &:active {
+          @apply translate-y-0 scale-[0.99];
+        }
+
+        &:focus-visible {
+          outline: 2px solid rgba(59, 130, 246, 0.7);
+          outline-offset: 3px;
+        }
       }
 
-      canvas {
-        max-width: 100% !important;
-        height: auto !important;
+      .emoji {
+        @apply text-5xl;
+        animation: oz-soft-bounce 1.15s ease-in-out infinite;
+      }
+
+      .label-btn {
+        @apply text-xl sm:text-2xl font-semibold text-white;
+        @apply bg-blue-600 px-7 py-4 rounded-2xl shadow-md;
+        @apply transition-colors;
+      }
+
+      .download-cta:hover .label-btn {
+        @apply bg-blue-700;
       }
     }
   }
